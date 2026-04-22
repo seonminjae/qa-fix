@@ -1,0 +1,816 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		024CBD1A607D114DAFC657E3 /* ActionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF5CC4C20589DC594B440B /* ActionBarView.swift */; };
+		0735FCAA182CC6CF4833DACF /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEEFA7AF0EAB86427D49604 /* Settings.swift */; };
+		1D225FBFEFFA7FCD1ED7A945 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8927729A8D8EB5C4FEB0C39 /* QuestionView.swift */; };
+		254491DEB35A278DF956E165 /* MCPConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373AD07AB00C7DE0F149ACCE /* MCPConfigManager.swift */; };
+		2D2AE498A3357A8210BAFC23 /* NotionAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819331DD679FE988F4F799 /* NotionAPIClient.swift */; };
+		3392854BDDF30987DDA76156 /* DiffParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5777334BC2F4BF8B69DF12B /* DiffParserTests.swift */; };
+		3929F5CB8625E8B15D739F24 /* AgentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D374E3E47A3BD31B03FA9F01 /* AgentViewModel.swift */; };
+		3B81FDA66A2487C5294A9F59 /* RetryPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1BE531BE12AA5413A67FEA /* RetryPolicyTests.swift */; };
+		3C4BEA7CB5BAD9ACA5EF0A35 /* AgentLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB25563D8902D14EF22CC399 /* AgentLogView.swift */; };
+		471BB2AAE88DE54665980FE3 /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FBF7945562F2FF3722BF3 /* AppLogger.swift */; };
+		4B6C00147153DDB9A2D71ED0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA59F8193C085FA03D7EE36 /* main.swift */; };
+		51285E5CDA376167A3FD9F9F /* PromptTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B6022FF4FC4784C46F9110 /* PromptTemplates.swift */; };
+		549B92B96D4207D7999DE836 /* BookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FED502DCB63C39E54226CD /* BookmarkManager.swift */; };
+		558166494B3D732BD2A950E2 /* ClaudeCodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF003F8BE8EA2DF2BBE0CFF /* ClaudeCodeService.swift */; };
+		5B7578C5E00C1A6DB4CE555D /* StreamJSONParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7301F00BB3BE7957D3103FAD /* StreamJSONParserTests.swift */; };
+		5CB5D43C8802D02866DE2AD8 /* DiffFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB42D7CC4AC3EF9B67D32A7 /* DiffFileView.swift */; };
+		5F4D6CDF4717AC6CAE52A4E7 /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A06543F772B69977BCF116 /* Ticket.swift */; };
+		69B9ADBA323E8758E2F8848E /* ClaudeCodeVersionProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F3B0350ACBAD51A9E72707 /* ClaudeCodeVersionProbe.swift */; };
+		6C0850582271F762FF23584F /* TicketDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDB475A89482680584CC14F /* TicketDetailView.swift */; };
+		7A297B9C21FC8F75BD059E57 /* SessionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558555DE777B45D510C4059C /* SessionRecord.swift */; };
+		7DDC94C4097EA2DBE3527E05 /* TicketRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE238ECBF7A7337C7C8A4B3A /* TicketRowView.swift */; };
+		7FB06923C36BA94AA10EB837 /* StreamJSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06CC99F5477177E4745A09A /* StreamJSONParser.swift */; };
+		81B5E1CF1EDD1B6F411F2E1D /* ClaudeCodeCLIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E4568EFFCC0DC83E8263C /* ClaudeCodeCLIClient.swift */; };
+		8BAD265D85C16A64C04B0092 /* MCPConfigManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11ACDEACEA13A4936D212C /* MCPConfigManagerTests.swift */; };
+		8F3C01124244FFDF156F1A71 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28570A337583DC50EB5C4B80 /* KeychainManager.swift */; };
+		A00D70D949D42A8045819F69 /* CrashRecoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38AF51262C11BF6DBC1AED9 /* CrashRecoveryView.swift */; };
+		A0417C637C17FD9824D03985 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183661B0860CF605231E6FAC /* ContentView.swift */; };
+		A26D0503065C7537B71BA803 /* TicketListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB2BA3CFA8CB078AB28BBD /* TicketListView.swift */; };
+		A4FEAF1A32CF0BDFF00192A4 /* ClaudeStreamEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB6A00D43B32DFFEA6F2866 /* ClaudeStreamEvent.swift */; };
+		A9C2ED115755E039D2C511F8 /* GitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00C0F8EE411886F6DE01553 /* GitService.swift */; };
+		AC6209BDF4CA054CB74EABF7 /* DiffViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D6CD00FCB1359C5B573E87 /* DiffViewModel.swift */; };
+		ACF15444521DB45C25C64E86 /* RetryPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D090CA8E58E3231643A794 /* RetryPolicy.swift */; };
+		B371AF8C51B74746042607FF /* NotionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB4A3A430E2529C1367E285 /* NotionModels.swift */; };
+		B44549AC7F7C7D48E643C7A1 /* QAFixMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB0FB9D952A364506CDC538 /* QAFixMacApp.swift */; };
+		B50B15C0A17A04D39336631E /* TicketListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74EDB75B9E0E821419C87DC /* TicketListViewModel.swift */; };
+		B71A2402F543B71B3C48237E /* DiffParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762B428F2AF33281FFE2B69B /* DiffParser.swift */; };
+		BB6A0C65B71A647F271883E7 /* NotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438C3A9A4A567B94DEF3BD4F /* NotionService.swift */; };
+		BE86C88296EBD2133862FA8F /* SECURITY.md in Resources */ = {isa = PBXBuildFile; fileRef = 1DF4A5DFC6B7E7E07DC305EB /* SECURITY.md */; };
+		CA3694FC0DBC12705DCD551D /* FixSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F04D501A323225C9785646 /* FixSessionView.swift */; };
+		CFF1E98FB91BB73EC871962C /* UIKit-CRITICAL.md in Resources */ = {isa = PBXBuildFile; fileRef = 844E4E16D59245A54990962B /* UIKit-CRITICAL.md */; };
+		D8E47E98461802FCA9EB66DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30E2257E16DB551C43ED4DE5 /* Assets.xcassets */; };
+		E2758D97EC8C21859DCEB698 /* CostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2039E7FAE50A0C87E79B212 /* CostViewModel.swift */; };
+		EFD931C805EFD8CFB403F63F /* DiffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC6D861F0A1C633021A101D /* DiffView.swift */; };
+		F064E9E48EF240B15F1C5E69 /* CRITICAL.md in Resources */ = {isa = PBXBuildFile; fileRef = FCCB81E7BFFD6503AC346C86 /* CRITICAL.md */; };
+		F231B952AFB09E80D2037A18 /* AgentOrchestrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B61A6846A22C85639B28FE /* AgentOrchestrator.swift */; };
+		F322A13DAC661F94112C772A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8194230BBF2F154D2389F5D0 /* SettingsView.swift */; };
+		FCFC18C98E8706B8774AC56C /* CostDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86D562D5BCB66A4E5E3D645 /* CostDashboardView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		416288205344D6612A8D9348 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 33F0499292463B812FC6D39D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A7781CC03EC0D730F93293E;
+			remoteInfo = QAFixMac;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		08CB2BA3CFA8CB078AB28BBD /* TicketListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketListView.swift; sourceTree = "<group>"; };
+		11B6022FF4FC4784C46F9110 /* PromptTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptTemplates.swift; sourceTree = "<group>"; };
+		183661B0860CF605231E6FAC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1BB4A3A430E2529C1367E285 /* NotionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionModels.swift; sourceTree = "<group>"; };
+		1DF4A5DFC6B7E7E07DC305EB /* SECURITY.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = SECURITY.md; sourceTree = "<group>"; };
+		28570A337583DC50EB5C4B80 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		2AAF5CC4C20589DC594B440B /* ActionBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionBarView.swift; sourceTree = "<group>"; };
+		2CDB475A89482680584CC14F /* TicketDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketDetailView.swift; sourceTree = "<group>"; };
+		30E2257E16DB551C43ED4DE5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		373AD07AB00C7DE0F149ACCE /* MCPConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPConfigManager.swift; sourceTree = "<group>"; };
+		438C3A9A4A567B94DEF3BD4F /* NotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionService.swift; sourceTree = "<group>"; };
+		46079B0AE744191DD7A4590E /* QAFixMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QAFixMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		558555DE777B45D510C4059C /* SessionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRecord.swift; sourceTree = "<group>"; };
+		56D090CA8E58E3231643A794 /* RetryPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetryPolicy.swift; sourceTree = "<group>"; };
+		56F3B0350ACBAD51A9E72707 /* ClaudeCodeVersionProbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeCodeVersionProbe.swift; sourceTree = "<group>"; };
+		6E11ACDEACEA13A4936D212C /* MCPConfigManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPConfigManagerTests.swift; sourceTree = "<group>"; };
+		7301F00BB3BE7957D3103FAD /* StreamJSONParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamJSONParserTests.swift; sourceTree = "<group>"; };
+		762B428F2AF33281FFE2B69B /* DiffParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffParser.swift; sourceTree = "<group>"; };
+		7E819331DD679FE988F4F799 /* NotionAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionAPIClient.swift; sourceTree = "<group>"; };
+		8194230BBF2F154D2389F5D0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		81F04D501A323225C9785646 /* FixSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixSessionView.swift; sourceTree = "<group>"; };
+		844E4E16D59245A54990962B /* UIKit-CRITICAL.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "UIKit-CRITICAL.md"; sourceTree = "<group>"; };
+		86D6CD00FCB1359C5B573E87 /* DiffViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffViewModel.swift; sourceTree = "<group>"; };
+		8CEEFA7AF0EAB86427D49604 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		8EF003F8BE8EA2DF2BBE0CFF /* ClaudeCodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeCodeService.swift; sourceTree = "<group>"; };
+		97B61A6846A22C85639B28FE /* AgentOrchestrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentOrchestrator.swift; sourceTree = "<group>"; };
+		9C2FBF7945562F2FF3722BF3 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
+		9E1BE531BE12AA5413A67FEA /* RetryPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetryPolicyTests.swift; sourceTree = "<group>"; };
+		9E2E4568EFFCC0DC83E8263C /* ClaudeCodeCLIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeCodeCLIClient.swift; sourceTree = "<group>"; };
+		A86D562D5BCB66A4E5E3D645 /* CostDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostDashboardView.swift; sourceTree = "<group>"; };
+		AEB6A00D43B32DFFEA6F2866 /* ClaudeStreamEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeStreamEvent.swift; sourceTree = "<group>"; };
+		B6A06543F772B69977BCF116 /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
+		B7C42CFF440A74132E796BA2 /* CLISpike */ = {isa = PBXFileReference; includeInIndex = 0; path = CLISpike; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDB42D7CC4AC3EF9B67D32A7 /* DiffFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffFileView.swift; sourceTree = "<group>"; };
+		BDC6D861F0A1C633021A101D /* DiffView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffView.swift; sourceTree = "<group>"; };
+		BF4F83DF2301BFEDBD6CA3C0 /* QAFixMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QAFixMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE238ECBF7A7337C7C8A4B3A /* TicketRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketRowView.swift; sourceTree = "<group>"; };
+		D00C0F8EE411886F6DE01553 /* GitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitService.swift; sourceTree = "<group>"; };
+		D374E3E47A3BD31B03FA9F01 /* AgentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentViewModel.swift; sourceTree = "<group>"; };
+		D5777334BC2F4BF8B69DF12B /* DiffParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffParserTests.swift; sourceTree = "<group>"; };
+		D74EDB75B9E0E821419C87DC /* TicketListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketListViewModel.swift; sourceTree = "<group>"; };
+		D8927729A8D8EB5C4FEB0C39 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		E06CC99F5477177E4745A09A /* StreamJSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamJSONParser.swift; sourceTree = "<group>"; };
+		E38AF51262C11BF6DBC1AED9 /* CrashRecoveryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashRecoveryView.swift; sourceTree = "<group>"; };
+		EBB0FB9D952A364506CDC538 /* QAFixMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAFixMacApp.swift; sourceTree = "<group>"; };
+		EEA59F8193C085FA03D7EE36 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		F2039E7FAE50A0C87E79B212 /* CostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostViewModel.swift; sourceTree = "<group>"; };
+		F31476F89172115283EB6E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F5FED502DCB63C39E54226CD /* BookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkManager.swift; sourceTree = "<group>"; };
+		FB25563D8902D14EF22CC399 /* AgentLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentLogView.swift; sourceTree = "<group>"; };
+		FCCB81E7BFFD6503AC346C86 /* CRITICAL.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CRITICAL.md; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		21FE9195D195AA03C96C2F7A /* Claude */ = {
+			isa = PBXGroup;
+			children = (
+				9E2E4568EFFCC0DC83E8263C /* ClaudeCodeCLIClient.swift */,
+				8EF003F8BE8EA2DF2BBE0CFF /* ClaudeCodeService.swift */,
+				56F3B0350ACBAD51A9E72707 /* ClaudeCodeVersionProbe.swift */,
+				E06CC99F5477177E4745A09A /* StreamJSONParser.swift */,
+			);
+			path = Claude;
+			sourceTree = "<group>";
+		};
+		2276953C0A439114BE698BE4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AEB6A00D43B32DFFEA6F2866 /* ClaudeStreamEvent.swift */,
+				558555DE777B45D510C4059C /* SessionRecord.swift */,
+				8CEEFA7AF0EAB86427D49604 /* Settings.swift */,
+				B6A06543F772B69977BCF116 /* Ticket.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		24E90654CCCFB827C96F36BF /* Tickets */ = {
+			isa = PBXGroup;
+			children = (
+				2CDB475A89482680584CC14F /* TicketDetailView.swift */,
+				08CB2BA3CFA8CB078AB28BBD /* TicketListView.swift */,
+				CE238ECBF7A7337C7C8A4B3A /* TicketRowView.swift */,
+			);
+			path = Tickets;
+			sourceTree = "<group>";
+		};
+		392B7C8ECF427BEAF941AA43 = {
+			isa = PBXGroup;
+			children = (
+				756F6202C6FAE2EAED434F7E /* CLISpike */,
+				63EAAC9F8FD744B36497AE64 /* QAFixMac */,
+				A1EA6CD5877FE7227F200960 /* QAFixMacTests */,
+				68CEBD3BDF82F85B74802D94 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		63EAAC9F8FD744B36497AE64 /* QAFixMac */ = {
+			isa = PBXGroup;
+			children = (
+				183661B0860CF605231E6FAC /* ContentView.swift */,
+				F31476F89172115283EB6E0E /* Info.plist */,
+				EBB0FB9D952A364506CDC538 /* QAFixMacApp.swift */,
+				2276953C0A439114BE698BE4 /* Models */,
+				8EC8A6F220EE155D39F8BCEA /* Resources */,
+				E4E09FA28C9B09AD21BB0D5A /* Services */,
+				6B97ED7F1C27125DA7C26778 /* Utilities */,
+				FCE7E0CD4C5F598157090B96 /* ViewModels */,
+				967DAAC1B6ABB8329D4D0826 /* Views */,
+			);
+			path = QAFixMac;
+			sourceTree = "<group>";
+		};
+		68CEBD3BDF82F85B74802D94 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B7C42CFF440A74132E796BA2 /* CLISpike */,
+				BF4F83DF2301BFEDBD6CA3C0 /* QAFixMac.app */,
+				46079B0AE744191DD7A4590E /* QAFixMacTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6B97ED7F1C27125DA7C26778 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				9C2FBF7945562F2FF3722BF3 /* AppLogger.swift */,
+				F5FED502DCB63C39E54226CD /* BookmarkManager.swift */,
+				762B428F2AF33281FFE2B69B /* DiffParser.swift */,
+				28570A337583DC50EB5C4B80 /* KeychainManager.swift */,
+				56D090CA8E58E3231643A794 /* RetryPolicy.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		756F6202C6FAE2EAED434F7E /* CLISpike */ = {
+			isa = PBXGroup;
+			children = (
+				EEA59F8193C085FA03D7EE36 /* main.swift */,
+			);
+			path = CLISpike;
+			sourceTree = "<group>";
+		};
+		8EC8A6F220EE155D39F8BCEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				30E2257E16DB551C43ED4DE5 /* Assets.xcassets */,
+				FCCB81E7BFFD6503AC346C86 /* CRITICAL.md */,
+				1DF4A5DFC6B7E7E07DC305EB /* SECURITY.md */,
+				844E4E16D59245A54990962B /* UIKit-CRITICAL.md */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		967DAAC1B6ABB8329D4D0826 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E38AF51262C11BF6DBC1AED9 /* CrashRecoveryView.swift */,
+				81F04D501A323225C9785646 /* FixSessionView.swift */,
+				F69388A9CBB19914F6E9BFAE /* Action */,
+				F70F3B23095D8DDDB7C14067 /* Agent */,
+				E0C6A152D9D280199BCCBE02 /* Cost */,
+				D7695B538EDD63D4F4455BB3 /* Diff */,
+				A036E77EFFAEE0A9CB86C57C /* Settings */,
+				24E90654CCCFB827C96F36BF /* Tickets */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		97B76EA28C646E2232F9B7C6 /* Notion */ = {
+			isa = PBXGroup;
+			children = (
+				7E819331DD679FE988F4F799 /* NotionAPIClient.swift */,
+				1BB4A3A430E2529C1367E285 /* NotionModels.swift */,
+				438C3A9A4A567B94DEF3BD4F /* NotionService.swift */,
+			);
+			path = Notion;
+			sourceTree = "<group>";
+		};
+		A036E77EFFAEE0A9CB86C57C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8194230BBF2F154D2389F5D0 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		A1EA6CD5877FE7227F200960 /* QAFixMacTests */ = {
+			isa = PBXGroup;
+			children = (
+				D5777334BC2F4BF8B69DF12B /* DiffParserTests.swift */,
+				6E11ACDEACEA13A4936D212C /* MCPConfigManagerTests.swift */,
+				9E1BE531BE12AA5413A67FEA /* RetryPolicyTests.swift */,
+				7301F00BB3BE7957D3103FAD /* StreamJSONParserTests.swift */,
+			);
+			path = QAFixMacTests;
+			sourceTree = "<group>";
+		};
+		BAB90E927EC1C24184675755 /* Agent */ = {
+			isa = PBXGroup;
+			children = (
+				97B61A6846A22C85639B28FE /* AgentOrchestrator.swift */,
+				11B6022FF4FC4784C46F9110 /* PromptTemplates.swift */,
+			);
+			path = Agent;
+			sourceTree = "<group>";
+		};
+		BED228C9F7FBE3C0D4B5031C /* Git */ = {
+			isa = PBXGroup;
+			children = (
+				D00C0F8EE411886F6DE01553 /* GitService.swift */,
+			);
+			path = Git;
+			sourceTree = "<group>";
+		};
+		D76408DB8A42318461D6032D /* MCP */ = {
+			isa = PBXGroup;
+			children = (
+				373AD07AB00C7DE0F149ACCE /* MCPConfigManager.swift */,
+			);
+			path = MCP;
+			sourceTree = "<group>";
+		};
+		D7695B538EDD63D4F4455BB3 /* Diff */ = {
+			isa = PBXGroup;
+			children = (
+				BDB42D7CC4AC3EF9B67D32A7 /* DiffFileView.swift */,
+				BDC6D861F0A1C633021A101D /* DiffView.swift */,
+			);
+			path = Diff;
+			sourceTree = "<group>";
+		};
+		E0C6A152D9D280199BCCBE02 /* Cost */ = {
+			isa = PBXGroup;
+			children = (
+				A86D562D5BCB66A4E5E3D645 /* CostDashboardView.swift */,
+			);
+			path = Cost;
+			sourceTree = "<group>";
+		};
+		E4E09FA28C9B09AD21BB0D5A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				BAB90E927EC1C24184675755 /* Agent */,
+				21FE9195D195AA03C96C2F7A /* Claude */,
+				BED228C9F7FBE3C0D4B5031C /* Git */,
+				D76408DB8A42318461D6032D /* MCP */,
+				97B76EA28C646E2232F9B7C6 /* Notion */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F69388A9CBB19914F6E9BFAE /* Action */ = {
+			isa = PBXGroup;
+			children = (
+				2AAF5CC4C20589DC594B440B /* ActionBarView.swift */,
+			);
+			path = Action;
+			sourceTree = "<group>";
+		};
+		F70F3B23095D8DDDB7C14067 /* Agent */ = {
+			isa = PBXGroup;
+			children = (
+				FB25563D8902D14EF22CC399 /* AgentLogView.swift */,
+				D8927729A8D8EB5C4FEB0C39 /* QuestionView.swift */,
+			);
+			path = Agent;
+			sourceTree = "<group>";
+		};
+		FCE7E0CD4C5F598157090B96 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				D374E3E47A3BD31B03FA9F01 /* AgentViewModel.swift */,
+				F2039E7FAE50A0C87E79B212 /* CostViewModel.swift */,
+				86D6CD00FCB1359C5B573E87 /* DiffViewModel.swift */,
+				D74EDB75B9E0E821419C87DC /* TicketListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2A7781CC03EC0D730F93293E /* QAFixMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EAAF757E90ACCD236C030D7D /* Build configuration list for PBXNativeTarget "QAFixMac" */;
+			buildPhases = (
+				BDDE00D089FA0C743A2C991A /* Sources */,
+				9966A1D81CF79A32E5FF25FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QAFixMac;
+			packageProductDependencies = (
+			);
+			productName = QAFixMac;
+			productReference = BF4F83DF2301BFEDBD6CA3C0 /* QAFixMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+		92F0D26088703DE2BFA2AB4F /* CLISpike */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8DBE03FE8D6E6A46E5B0A78D /* Build configuration list for PBXNativeTarget "CLISpike" */;
+			buildPhases = (
+				53132AC7041574AD6B74AC9F /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CLISpike;
+			packageProductDependencies = (
+			);
+			productName = CLISpike;
+			productReference = B7C42CFF440A74132E796BA2 /* CLISpike */;
+			productType = "com.apple.product-type.tool";
+		};
+		ED9063E7C4A5CD61A2AD4B20 /* QAFixMacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF2B39666708CACCA9536CE2 /* Build configuration list for PBXNativeTarget "QAFixMacTests" */;
+			buildPhases = (
+				E29DE1E5F792DBD57E8106CE /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				80A9929DF31990702EFC4C8B /* PBXTargetDependency */,
+			);
+			name = QAFixMacTests;
+			packageProductDependencies = (
+			);
+			productName = QAFixMacTests;
+			productReference = 46079B0AE744191DD7A4590E /* QAFixMacTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		33F0499292463B812FC6D39D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					2A7781CC03EC0D730F93293E = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					92F0D26088703DE2BFA2AB4F = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					ED9063E7C4A5CD61A2AD4B20 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 9D301666B5FD1B473F09508A /* Build configuration list for PBXProject "QAFixMac" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 392B7C8ECF427BEAF941AA43;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				92F0D26088703DE2BFA2AB4F /* CLISpike */,
+				2A7781CC03EC0D730F93293E /* QAFixMac */,
+				ED9063E7C4A5CD61A2AD4B20 /* QAFixMacTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9966A1D81CF79A32E5FF25FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8E47E98461802FCA9EB66DC /* Assets.xcassets in Resources */,
+				F064E9E48EF240B15F1C5E69 /* CRITICAL.md in Resources */,
+				BE86C88296EBD2133862FA8F /* SECURITY.md in Resources */,
+				CFF1E98FB91BB73EC871962C /* UIKit-CRITICAL.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		53132AC7041574AD6B74AC9F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B6C00147153DDB9A2D71ED0 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDDE00D089FA0C743A2C991A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				024CBD1A607D114DAFC657E3 /* ActionBarView.swift in Sources */,
+				3C4BEA7CB5BAD9ACA5EF0A35 /* AgentLogView.swift in Sources */,
+				F231B952AFB09E80D2037A18 /* AgentOrchestrator.swift in Sources */,
+				3929F5CB8625E8B15D739F24 /* AgentViewModel.swift in Sources */,
+				471BB2AAE88DE54665980FE3 /* AppLogger.swift in Sources */,
+				549B92B96D4207D7999DE836 /* BookmarkManager.swift in Sources */,
+				81B5E1CF1EDD1B6F411F2E1D /* ClaudeCodeCLIClient.swift in Sources */,
+				558166494B3D732BD2A950E2 /* ClaudeCodeService.swift in Sources */,
+				69B9ADBA323E8758E2F8848E /* ClaudeCodeVersionProbe.swift in Sources */,
+				A4FEAF1A32CF0BDFF00192A4 /* ClaudeStreamEvent.swift in Sources */,
+				A0417C637C17FD9824D03985 /* ContentView.swift in Sources */,
+				FCFC18C98E8706B8774AC56C /* CostDashboardView.swift in Sources */,
+				E2758D97EC8C21859DCEB698 /* CostViewModel.swift in Sources */,
+				A00D70D949D42A8045819F69 /* CrashRecoveryView.swift in Sources */,
+				5CB5D43C8802D02866DE2AD8 /* DiffFileView.swift in Sources */,
+				B71A2402F543B71B3C48237E /* DiffParser.swift in Sources */,
+				EFD931C805EFD8CFB403F63F /* DiffView.swift in Sources */,
+				AC6209BDF4CA054CB74EABF7 /* DiffViewModel.swift in Sources */,
+				CA3694FC0DBC12705DCD551D /* FixSessionView.swift in Sources */,
+				A9C2ED115755E039D2C511F8 /* GitService.swift in Sources */,
+				8F3C01124244FFDF156F1A71 /* KeychainManager.swift in Sources */,
+				254491DEB35A278DF956E165 /* MCPConfigManager.swift in Sources */,
+				2D2AE498A3357A8210BAFC23 /* NotionAPIClient.swift in Sources */,
+				B371AF8C51B74746042607FF /* NotionModels.swift in Sources */,
+				BB6A0C65B71A647F271883E7 /* NotionService.swift in Sources */,
+				51285E5CDA376167A3FD9F9F /* PromptTemplates.swift in Sources */,
+				B44549AC7F7C7D48E643C7A1 /* QAFixMacApp.swift in Sources */,
+				1D225FBFEFFA7FCD1ED7A945 /* QuestionView.swift in Sources */,
+				ACF15444521DB45C25C64E86 /* RetryPolicy.swift in Sources */,
+				7A297B9C21FC8F75BD059E57 /* SessionRecord.swift in Sources */,
+				0735FCAA182CC6CF4833DACF /* Settings.swift in Sources */,
+				F322A13DAC661F94112C772A /* SettingsView.swift in Sources */,
+				7FB06923C36BA94AA10EB837 /* StreamJSONParser.swift in Sources */,
+				5F4D6CDF4717AC6CAE52A4E7 /* Ticket.swift in Sources */,
+				6C0850582271F762FF23584F /* TicketDetailView.swift in Sources */,
+				A26D0503065C7537B71BA803 /* TicketListView.swift in Sources */,
+				B50B15C0A17A04D39336631E /* TicketListViewModel.swift in Sources */,
+				7DDC94C4097EA2DBE3527E05 /* TicketRowView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E29DE1E5F792DBD57E8106CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3392854BDDF30987DDA76156 /* DiffParserTests.swift in Sources */,
+				8BAD265D85C16A64C04B0092 /* MCPConfigManagerTests.swift in Sources */,
+				3B81FDA66A2487C5294A9F59 /* RetryPolicyTests.swift in Sources */,
+				5B7578C5E00C1A6DB4CE555D /* StreamJSONParserTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		80A9929DF31990702EFC4C8B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A7781CC03EC0D730F93293E /* QAFixMac */;
+			targetProxy = 416288205344D6612A8D9348 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1FC9735AD644E83E538E8E11 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QAFixMac/Resources/QAFixMac.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = QAFixMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fanmaum.QAFixMac;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		42FFCA9E83630051CF6CAE5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		43A71F1F693D187DABD36FA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fanmaum.QAFixMacTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QAFixMac.app/Contents/MacOS/QAFixMac";
+			};
+			name = Debug;
+		};
+		52D6D1389F29FA244EBA1BE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fanmaum.QAFixMac.CLISpike;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		5818E6A3C57E8525437FC64B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fanmaum.QAFixMacTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QAFixMac.app/Contents/MacOS/QAFixMac";
+			};
+			name = Release;
+		};
+		C8229C73429A3D78AE3D0732 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		CD772D4C6C51996C23391C27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fanmaum.QAFixMac.CLISpike;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E68062E5D2FDA008E318B050 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QAFixMac/Resources/QAFixMac.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = QAFixMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fanmaum.QAFixMac;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8DBE03FE8D6E6A46E5B0A78D /* Build configuration list for PBXNativeTarget "CLISpike" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52D6D1389F29FA244EBA1BE4 /* Debug */,
+				CD772D4C6C51996C23391C27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9D301666B5FD1B473F09508A /* Build configuration list for PBXProject "QAFixMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C8229C73429A3D78AE3D0732 /* Debug */,
+				42FFCA9E83630051CF6CAE5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DF2B39666708CACCA9536CE2 /* Build configuration list for PBXNativeTarget "QAFixMacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43A71F1F693D187DABD36FA2 /* Debug */,
+				5818E6A3C57E8525437FC64B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EAAF757E90ACCD236C030D7D /* Build configuration list for PBXNativeTarget "QAFixMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1FC9735AD644E83E538E8E11 /* Debug */,
+				E68062E5D2FDA008E318B050 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 33F0499292463B812FC6D39D /* Project object */;
+}
