@@ -1,13 +1,12 @@
 .DS_Store
 build/
 DerivedData/
-*.xcodeproj/*
-!*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
-!*.xcodeproj/project.xcworkspace/
-*.xcworkspace/xcuserdata/
-*.xcuserdatad/
-xcuserdata/
+
+# Tuist-generated artifacts (`tuist generate` recreates these)
+*.xcodeproj/
+*.xcworkspace/
+Derived/
+
 *.swiftpm/
 Package.resolved
 .build/
