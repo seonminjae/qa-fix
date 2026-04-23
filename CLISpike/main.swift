@@ -60,7 +60,6 @@ func runSpike(prompt: String, workingDirectory: URL) throws {
     process.arguments = [
         "-p",
         "--verbose",
-        "--bare",
         "--output-format", "stream-json",
         "--permission-mode", "bypassPermissions",
         "--add-dir", workingDirectory.path

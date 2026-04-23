@@ -13,7 +13,6 @@ struct ClaudeInvocation {
             binary.path,
             "-p",
             "--verbose",
-            "--bare",
             "--output-format", "stream-json",
             "--include-partial-messages",
             "--permission-mode", "bypassPermissions",

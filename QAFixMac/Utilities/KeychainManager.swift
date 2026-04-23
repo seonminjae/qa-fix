@@ -3,7 +3,6 @@ import Security
 
 enum KeychainKey: String {
     case notionToken = "com.fanmaum.QAFixMac.notionToken"
-    case anthropicAPIKey = "com.fanmaum.QAFixMac.anthropicAPIKey"
 }
 
 enum KeychainError: Error, LocalizedError {

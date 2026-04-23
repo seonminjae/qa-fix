@@ -45,20 +45,20 @@
 
 ## 3. 표준 CLI 호출 템플릿
 
-**절대 `--verbose`와 `--bare`를 빼지 마세요.**
+**`--verbose`는 필수. `--bare`는 절대 쓰지 마세요.**
 
 - `--verbose` 없이 `--output-format stream-json`을 쓰면 CLI가 하드 에러로 즉시
   종료합니다 (2.1.112 기준 `Error: When using --print, --output-format=stream-json
   requires --verbose`).
-- `--bare` 없이 실행하면 사용자의 hooks/plugins/MCP가 subprocess에 자동 로드되어
-  3~5초 startup 오버헤드 + system-reminder 토큰 낭비 + 예측 불가능한 부수효과가
-  발생합니다. 컨텍스트는 `--system-prompt`, `--mcp-config`, `--add-dir`로 명시
-  전달해야 합니다.
+- `--bare`를 붙이면 **Claude Max OAuth 인증이 깨져서** 모든 요청이 `Not logged in ·
+  Please run /login`으로 실패합니다 (2.1.112에서 2026-04-23 live 검증 완료).
+  `apiKeySource: "none"` + exit 1 + ~80ms duration이 증상. 플러그인/훅 격리가
+  필요할 경우 `--bare` 대신 `HOME` 또는 `CLAUDE_HOME` 환경변수로 격리된 `.claude/`
+  디렉터리를 가리키는 방식을 써야 합니다 (후속 스파이크 필요).
 
 ```
 claude -p \
   --verbose \
-  --bare \
   --output-format stream-json \
   --include-partial-messages \
   --permission-mode bypassPermissions \
@@ -70,7 +70,14 @@ claude -p \
 ```
 
 구현 위치: `QAFixMac/Services/Claude/ClaudeCodeService.swift` 의
-`ClaudeInvocation.command(binary:)`. 변경 시 CLISpike도 함께 업데이트하세요.
+`ClaudeInvocation.command(binary:)`. 변경 시 `CLISpike/main.swift`와
+`SettingsView.verifyLogin`도 함께 업데이트하세요.
+
+**트레이드오프 (현재 상태)**: `--bare` 없이 실행하므로 사용자의 hooks / plugins /
+MCP (OMC, swift-lsp, figma 등)가 subprocess에 자동 로드됩니다. 3~5초 startup
+오버헤드 + system-reminder 토큰 낭비 + debugger/verifier 에이전트가 의도치 않게
+외부 skill을 호출할 위험이 있습니다. Phase 2의 후속 과제에서 격리 대책(`HOME`
+override 또는 claude-code의 공식 isolation 플래그)을 탐색해야 합니다.
 
 ---
 
@@ -225,16 +232,23 @@ QAFixMac/
 
 ## 9. 주의사항 (Claude가 작업할 때)
 
-- **`--verbose --bare`는 절대 제거하지 마세요.** 이 두 플래그는 합의 계획의
-  BLOCKER였으며 빠지면 앱 전체가 기능 0%.
+- **`--verbose`는 필수, `--bare`는 금지.** `--verbose`가 없으면 stream-json
+  모드가 즉시 에러. `--bare`를 붙이면 OAuth 인증이 깨져서 `Not logged in` 실패
+  (2.1.112 live 검증됨, 2026-04-23).
+- **인증은 Claude Max OAuth 재사용 전제.** 내부 사용자는 Terminal에서
+  `claude` 한 번 실행 → `/login` 완료 시 Keychain(`Claude Code-credentials`)에
+  저장된 토큰을 subprocess가 그대로 읽습니다. 별도 `ANTHROPIC_API_KEY` 입력
+  경로는 제거했습니다.
+- **App Sandbox는 OFF.** `QAFixMac.entitlements`의 `app-sandbox = false`.
+  배포는 회사 내부 클론 빌드 전용이라 App Store 경로는 고려 안 함. Developer ID
+  서명도 필수 아님. Sandbox/Bookmark 조합 설계는 남아있지만 현재 비활성.
 - **`--mcp-config`가 가리키는 파일은 Notion MCP만 포함.** `~/.claude/settings.json`
   등 사용자 전역 MCP를 덮어쓰지 않습니다. `MCPConfigManager`로만 생성.
-- **App Sandbox는 ON 상태로 유지.** `process.exec`가 없어도 entitlement 조합
-  (bookmarks.app-scope + files.user-selected.rw)으로 subprocess + 지정 레포
-  접근이 동작합니다. (스파이크에서 추가 검증 필요)
-- **커밋 플로우는 단일 경로.** Phase 2 `/commit` 슬래시 커맨드 직접 호출 안은
-  `--bare`와 충돌하므로 **삭제되었습니다**. P0 리뷰는 system-prompt에 가이드
-  전문을 주입하는 방식으로만 수행.
+  단, `--bare`를 쓸 수 없는 현재 제약상 사용자 전역 MCP/플러그인이 subprocess에
+  함께 로드되는 건 피할 수 없습니다 (후속 격리 과제).
+- **커밋 플로우는 단일 경로.** `/commit` 슬래시 커맨드 직접 호출은 subprocess에
+  의도치 않은 경로라 **삭제되었습니다**. P0 리뷰는 `PromptTemplates
+  .commitSystemPrompt()`가 CRITICAL.md 등을 주입해서 수행.
 - **`ClaudeStreamEvent.unknown`은 forward compat용.** 새 이벤트 타입이 CLI
   업데이트로 추가되어도 파서가 터지지 않습니다. 무시하지 말고 UI에서 collapsible
   로그로 볼 수 있게 남겨두는 것이 원칙.

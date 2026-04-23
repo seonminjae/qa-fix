@@ -41,33 +41,53 @@ struct FixSessionView: View {
                         .font(.caption).foregroundStyle(.secondary)
                 }
                 Spacer()
-                Button {
-                    Task { await viewModel.start(ticket: ticket, repo: repo) }
-                } label: {
-                    Label("Start Fix", systemImage: "play.fill")
+                if viewModel.isBusy {
+                    Button(role: .destructive) {
+                        Task { await viewModel.cancel(ticket: ticket, repo: repo) }
+                    } label: {
+                        Label("Stop", systemImage: "stop.fill")
+                    }
+                    .help("에이전트 실행을 중단하고 변경사항을 폐기합니다.")
+                } else {
+                    Button {
+                        Task { await viewModel.start(ticket: ticket, repo: repo) }
+                    } label: {
+                        Label("Start Fix", systemImage: "play.fill")
+                    }
+                    .disabled(viewModel.stage != .ready && viewModel.stage != .failed)
                 }
-                .disabled(viewModel.stage != .ready && viewModel.stage != .failed)
             }
             .padding()
             Divider()
 
             HSplitView {
-                VStack(alignment: .leading) {
-                    Text("Agent Log").font(.subheadline).padding(.top, 6).padding(.horizontal, 8)
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Agent Log")
+                        .font(.subheadline)
+                        .padding(.top, 6)
+                        .padding(.horizontal, 8)
                     AgentLogView(log: viewModel.orchestrator.log)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .frame(minWidth: 320)
+                .frame(minWidth: 320, maxWidth: .infinity, maxHeight: .infinity)
 
-                VStack(alignment: .leading) {
-                    Text("Diff").font(.subheadline).padding(.top, 6).padding(.horizontal, 8)
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Diff")
+                        .font(.subheadline)
+                        .padding(.top, 6)
+                        .padding(.horizontal, 8)
                     if viewModel.diffFiles.isEmpty {
-                        Text("No changes yet").foregroundStyle(.secondary).padding()
+                        Text("No changes yet")
+                            .foregroundStyle(.secondary)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                     } else {
                         DiffView(files: viewModel.diffFiles)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                 }
-                .frame(minWidth: 320)
+                .frame(minWidth: 320, maxWidth: .infinity, maxHeight: .infinity)
             }
+            .frame(maxHeight: .infinity)
 
             if viewModel.hasPendingQuestion {
                 Divider()
@@ -100,5 +120,6 @@ struct FixSessionView: View {
                 Text(viewModel.status).foregroundStyle(.secondary).font(.caption).padding(8)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

@@ -9,7 +9,6 @@ final class SettingsViewModel {
     var repositoryBookmark: Data?
     var model: AnthropicModel = .sonnet4
     var maxBudgetUSD: Double = 5.0
-    var anthropicAPIKey: String = ""
 
     var claudeVersionStatus: String = "Checking…"
     var claudeVersionOK: Bool = false
@@ -20,7 +19,6 @@ final class SettingsViewModel {
     func load() {
         let defaults = UserDefaults.standard
         notionToken = KeychainManager.load(for: .notionToken) ?? ""
-        anthropicAPIKey = KeychainManager.load(for: .anthropicAPIKey) ?? ""
         notionDatabaseID = defaults.string(forKey: SettingsStoreKey.notionDatabaseID) ?? ""
         repositoryBookmark = defaults.data(forKey: SettingsStoreKey.repositoryBookmark)
         if let bookmark = repositoryBookmark, let url = try? BookmarkManager.resolve(bookmark) {
@@ -41,11 +39,6 @@ final class SettingsViewModel {
             if let url = try? MCPConfigManager.writeNotionConfig(token: notionToken) {
                 mcpConfigPath = url.path
             }
-        }
-        if anthropicAPIKey.isEmpty {
-            KeychainManager.delete(for: .anthropicAPIKey)
-        } else {
-            try? KeychainManager.save(anthropicAPIKey, for: .anthropicAPIKey)
         }
         UserDefaults.standard.set(notionDatabaseID, forKey: SettingsStoreKey.notionDatabaseID)
         UserDefaults.standard.set(model.rawValue, forKey: SettingsStoreKey.model)
@@ -79,29 +72,8 @@ final class SettingsViewModel {
         }
     }
 
-    /// Opens Terminal.app and runs `claude`, dropping the user into an interactive session.
-    /// The user must type `/login` inside that session to trigger OAuth.
-    func openTerminalForLogin() {
-        let script = """
-        tell application "Terminal"
-            activate
-            do script "clear; echo '────────────────────────────────────────────────'; echo ' QAFixMac Login Helper'; echo '────────────────────────────────────────────────'; echo ''; echo '1. A Claude Code interactive session will start below.'; echo '2. Type  /login  (then Enter) to open OAuth in browser.'; echo '3. Complete login, return here, then type  /exit  or close this window.'; echo ''; claude"
-        end tell
-        """
-        let process = Process()
-        process.executableURL = URL(fileURLWithPath: "/usr/bin/osascript")
-        process.arguments = ["-e", script]
-        try? process.run()
-    }
-
     /// Runs a minimal `claude -p "hi"` to verify the binary + auth work end-to-end.
     func verifyLogin() async {
-        // Persist the API key (if any) before running the test so the subprocess env picks it up.
-        if anthropicAPIKey.isEmpty {
-            KeychainManager.delete(for: .anthropicAPIKey)
-        } else {
-            try? KeychainManager.save(anthropicAPIKey, for: .anthropicAPIKey)
-        }
         loginTestResult = "Testing…"
         guard let binary = ClaudeCodeVersionProbe.resolveBinary() else {
             loginTestResult = "❌ claude binary not found"
@@ -112,7 +84,6 @@ final class SettingsViewModel {
         process.arguments = [
             "-p",
             "--verbose",
-            "--bare",
             "--output-format", "stream-json",
             "--permission-mode", "bypassPermissions"
         ]
@@ -260,11 +231,7 @@ struct SettingsView: View {
                 .help("Re-check version")
             }
 
-            field("Anthropic API Key") {
-                SecureField("sk-ant-api03-xxxxxxxxxxxx", text: $viewModel.anthropicAPIKey)
-                    .textFieldStyle(.roundedBorder)
-            }
-            Text("Xcode Debug 빌드는 Terminal의 Claude Max OAuth(Keychain 저장)에 접근할 수 없습니다. console.anthropic.com에서 API Key를 발급해 입력해주세요. 저장 시 Keychain에 암호화 보관되고 subprocess에 `ANTHROPIC_API_KEY` 환경변수로 주입됩니다. 공란이면 기존 로그인 상태에 의존합니다(일반적으로 실패).")
+            Text("Terminal에서 `claude` 실행 후 `/login` 한 번이면 Claude Max OAuth가 Keychain에 저장되어 subprocess에서도 재사용됩니다. 별도 API Key 입력은 필요하지 않습니다.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -273,11 +240,7 @@ struct SettingsView: View {
                 Button("Test `claude -p hi`") {
                     Task { await viewModel.verifyLogin() }
                 }
-                .help("Runs a minimal test to confirm credentials work.")
-                Button("Open Terminal (OAuth)") {
-                    viewModel.openTerminalForLogin()
-                }
-                .help("Opens Terminal.app for users who prefer Claude Max OAuth — useful to update the Claude Code credentials for terminal use.")
+                .help("Runs a minimal test to confirm CLI auth works.")
                 Spacer(minLength: 0)
             }
             if let result = viewModel.loginTestResult {

@@ -120,8 +120,8 @@ struct ClaudeCodeVersionProbe {
     }
 
     /// Build a subprocess environment that injects the claude binary's parent directory
-    /// (which is where `node` lives for nvm installs) into PATH, and forwards the stored
-    /// Anthropic API key when available.
+    /// (which is where `node` lives for nvm installs) into PATH so the subprocess can
+    /// locate its Node runtime. Auth is delegated to Claude Code's own Keychain OAuth.
     static func environment(for binary: URL) -> [String: String] {
         var env = ProcessInfo.processInfo.environment
         let binDir = binary.deletingLastPathComponent().path
@@ -139,9 +139,6 @@ struct ClaudeCodeVersionProbe {
         var seen = Set<String>()
         let deduped = merged.filter { seen.insert($0).inserted }
         env["PATH"] = deduped.joined(separator: ":")
-        if let key = KeychainManager.load(for: .anthropicAPIKey), !key.isEmpty {
-            env["ANTHROPIC_API_KEY"] = key
-        }
         return env
     }
 
