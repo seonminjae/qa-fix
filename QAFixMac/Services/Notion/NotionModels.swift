@@ -14,7 +14,16 @@ struct NotionQueryResponse: Decodable {
 
 struct NotionPage: Decodable {
     let id: String
+    let createdTime: String?
+    let lastEditedTime: String?
     let properties: [String: NotionProperty]
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case createdTime = "created_time"
+        case lastEditedTime = "last_edited_time"
+        case properties
+    }
 }
 
 enum NotionProperty: Decodable {
