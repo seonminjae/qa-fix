@@ -11,3 +11,5 @@ xcuserdata/
 *.swiftpm/
 Package.resolved
 .build/
+.omc/
+.claude/settings.local.json
