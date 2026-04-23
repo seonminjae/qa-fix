@@ -64,6 +64,9 @@ enum DiffParser {
                 }
                 continue
             }
+            if line.hasPrefix("--- ") {
+                continue
+            }
             if line.hasPrefix("@@") {
                 flushHunk()
                 currentHunkHeader = line

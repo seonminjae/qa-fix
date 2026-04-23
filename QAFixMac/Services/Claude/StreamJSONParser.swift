@@ -90,8 +90,11 @@ struct StreamJSONParser {
 
 final class NDJSONLineBuffer {
     private var buffer = Data()
+    private let lock = NSLock()
 
     func append(_ data: Data) -> [String] {
+        lock.lock()
+        defer { lock.unlock() }
         buffer.append(data)
         var lines: [String] = []
         while let newlineIndex = buffer.firstIndex(of: 0x0A) {
@@ -105,6 +108,8 @@ final class NDJSONLineBuffer {
     }
 
     func flush() -> String? {
+        lock.lock()
+        defer { lock.unlock() }
         guard !buffer.isEmpty else { return nil }
         let tail = String(data: buffer, encoding: .utf8)
         buffer.removeAll()

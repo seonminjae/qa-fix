@@ -123,7 +123,7 @@ final class AgentOrchestrator {
     private func runVerifier(ticket: Ticket, workingDirectory: URL) async {
         phase = .verifierRunning
         lastVerifierOutput = ""
-        let gitDiff = (try? GitCLIClient.diff(at: workingDirectory)) ?? "(git diff 실행 실패)"
+        let gitDiff = (try? await GitCLIClient.diff(at: workingDirectory)) ?? "(git diff 실행 실패)"
         let invocation = ClaudeInvocation(
             prompt: PromptTemplates.verifierUserPrompt(
                 ticket: ticket,
@@ -206,16 +206,27 @@ final class AgentOrchestrator {
     }
 
     private func parseDebugger(_ text: String) -> DebuggerOutcome {
-        let firstLine = text.split(separator: "\n", maxSplits: 1).first.map(String.init) ?? ""
-        if firstLine.contains("[질문 필요]") { return .question(body: text) }
-        if firstLine.contains("[수정 완료]") { return .fixed(body: text) }
+        let head = Self.leadingNonEmptyLines(text, limit: 5)
+        if head.contains(where: { $0.contains("[질문 필요]") }) { return .question(body: text) }
+        if head.contains(where: { $0.contains("[수정 완료]") }) { return .fixed(body: text) }
         return .inconclusive(body: text)
     }
 
     private func parseVerifier(_ text: String) -> VerifierOutcome {
-        let firstLine = text.split(separator: "\n", maxSplits: 1).first.map(String.init) ?? ""
-        if firstLine.contains("[통과]") { return .pass(body: text) }
-        if firstLine.contains("[재수정 필요]") { return .refix(body: text) }
+        let head = Self.leadingNonEmptyLines(text, limit: 5)
+        if head.contains(where: { $0.contains("[통과]") }) { return .pass(body: text) }
+        if head.contains(where: { $0.contains("[재수정 필요]") }) { return .refix(body: text) }
         return .inconclusive(body: text)
+    }
+
+    private static func leadingNonEmptyLines(_ text: String, limit: Int) -> [String] {
+        var result: [String] = []
+        for raw in text.split(separator: "\n", omittingEmptySubsequences: false) {
+            let trimmed = raw.trimmingCharacters(in: .whitespaces)
+            guard !trimmed.isEmpty else { continue }
+            result.append(trimmed)
+            if result.count >= limit { break }
+        }
+        return result
     }
 }

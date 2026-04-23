@@ -64,7 +64,7 @@ final class AgentViewModel {
         var record = SessionRecord.new(ticket: ticket)
         do {
             let stashID = "QAFixMac-\(ticket.displayID)-\(Int(Date().timeIntervalSince1970))"
-            let result = try GitCLIClient.stashPush(message: stashID, at: repo)
+            let result = try await GitCLIClient.stashPush(message: stashID, at: repo)
             stashMessage = stashID
             record.stashMessage = stashID
             status = "stash: \(result.trimmingCharacters(in: .whitespacesAndNewlines))"
@@ -92,16 +92,20 @@ final class AgentViewModel {
     func cancel(ticket: Ticket?, repo: URL) async {
         orchestrator.cancel()
         do {
-            try GitCLIClient.checkoutAll(at: repo)
+            try await GitCLIClient.checkoutAll(at: repo)
             if stashMessage != nil {
-                _ = try? GitCLIClient.stashPop(at: repo)
+                do {
+                    _ = try await GitCLIClient.stashPop(at: repo)
+                } catch {
+                    errorMessage = "stash pop failed: \(error.localizedDescription). `git stash list`로 남은 stash 확인 후 수동 복구 필요."
+                }
                 stashMessage = nil
             }
             status = "변경사항 폐기 완료."
         } catch {
             errorMessage = error.localizedDescription
         }
-        finishRecord(status: .cancelled)
+        await finishRecord(status: .cancelled)
         stage = .ready
     }
 
@@ -115,7 +119,7 @@ final class AgentViewModel {
         stage = .committing
         commitOutput = ""
         do {
-            try GitCLIClient.run(["add", "-A"], at: repo)
+            _ = try await GitCLIClient.run(["add", "-A"], at: repo)
             let invocation = ClaudeInvocation(
                 prompt: "Inspect staged changes and create a commit for QA ticket \(ticket.displayID) — \(ticket.title). Return [COMMIT OK] <sha> <subject> on success.",
                 systemPrompt: PromptTemplates.commitSystemPrompt(),
@@ -153,15 +157,15 @@ final class AgentViewModel {
                     break
                 }
             }
-            let sha = (try? GitCLIClient.headSHA(at: repo)) ?? "?"
+            let sha = (try? await GitCLIClient.headSHA(at: repo)) ?? "?"
             status = "commit \(sha) 완료"
             try await notion.patchStatus(pageID: ticket.pageID, statusName: "In progress")
             mergeCommitCost(cost: commitCost, input: commitInput, output: commitOutputTokens)
-            finishRecord(status: .completed, commitSHA: sha, repo: repo)
+            await finishRecord(status: .completed, commitSHA: sha, repo: repo)
             stage = .completed
         } catch {
             errorMessage = error.localizedDescription
-            finishRecord(status: .crashed, repo: repo)
+            await finishRecord(status: .crashed, repo: repo)
             stage = .failed
         }
     }
@@ -179,7 +183,7 @@ final class AgentViewModel {
             stage = .readyToCommit
         case .failed:
             errorMessage = orchestrator.lastError
-            finishRecord(status: .crashed, repo: repo)
+            await finishRecord(status: .crashed, repo: repo)
             stage = .failed
         default:
             break
@@ -188,7 +192,7 @@ final class AgentViewModel {
 
     private func refreshDiff(repo: URL) async {
         do {
-            let diff = try GitCLIClient.diff(at: repo)
+            let diff = try await GitCLIClient.diff(at: repo)
             diffFiles = DiffParser.parse(diff)
         } catch {
             diffFiles = []
@@ -222,13 +226,13 @@ final class AgentViewModel {
         persist(record)
     }
 
-    private func finishRecord(status: SessionStatus, commitSHA: String? = nil, repo: URL? = nil) {
+    private func finishRecord(status: SessionStatus, commitSHA: String? = nil, repo: URL? = nil) async {
         guard var record = currentSession else { return }
         record.status = status
         record.endedAt = Date()
         if let commitSHA { record.commitSHA = commitSHA }
         if let repo, record.changedFiles.isEmpty {
-            record.changedFiles = (try? GitCLIClient.diffNameOnly(at: repo)) ?? []
+            record.changedFiles = (try? await GitCLIClient.diffNameOnly(at: repo)) ?? []
         }
         currentSession = record
         persist(record)

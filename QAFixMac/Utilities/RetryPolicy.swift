@@ -51,14 +51,18 @@ actor ConcurrencyLimiter {
         await withCheckedContinuation { cont in
             waiters.append(cont)
         }
-        active += 1
+        // Slot ownership was transferred from the releaser; `active` is
+        // unchanged on purpose. Do not increment here — a concurrent
+        // `acquire()` would otherwise push us above `limit`.
     }
 
     func release() {
-        active -= 1
         if !waiters.isEmpty {
             let next = waiters.removeFirst()
             next.resume()
+            // Slot stays "active" — ownership transfers to the resumed waiter.
+        } else {
+            active -= 1
         }
     }
 }

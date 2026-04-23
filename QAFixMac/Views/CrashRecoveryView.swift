@@ -26,13 +26,13 @@ final class CrashRecoveryViewModel {
         statusMessage = "\(record.ticketDisplayID): marked cancelled"
     }
 
-    func popStash(for record: SessionRecord, repo: URL) {
+    func popStash(for record: SessionRecord, repo: URL) async {
         guard record.stashMessage != nil else {
             statusMessage = "\(record.ticketDisplayID): no stash to pop"
             return
         }
         do {
-            _ = try GitCLIClient.stashPop(at: repo)
+            _ = try await GitCLIClient.stashPop(at: repo)
             statusMessage = "\(record.ticketDisplayID): stash popped"
         } catch {
             statusMessage = "\(record.ticketDisplayID): pop failed — \(error.localizedDescription)"
@@ -105,7 +105,7 @@ struct CrashRecoveryView: View {
                 if session.stashMessage != nil, resolvedRepo() != nil {
                     Button("Pop stash") {
                         if let repo = resolvedRepo() {
-                            viewModel.popStash(for: session, repo: repo)
+                            Task { await viewModel.popStash(for: session, repo: repo) }
                         }
                     }
                 }
