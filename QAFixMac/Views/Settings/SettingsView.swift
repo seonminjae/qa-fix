@@ -7,8 +7,9 @@ final class SettingsViewModel {
     var notionDatabaseID: String = ""
     var repositoryPath: String = ""
     var repositoryBookmark: Data?
-    var model: AnthropicModel = .sonnet4
+    var model: AnthropicModel = .opus46
     var maxBudgetUSD: Double = 5.0
+    var platforms: Set<Platform> = []
 
     var claudeVersionStatus: String = "Checking…"
     var claudeVersionOK: Bool = false
@@ -31,6 +32,7 @@ final class SettingsViewModel {
         if defaults.object(forKey: SettingsStoreKey.maxBudgetUSD) != nil {
             maxBudgetUSD = defaults.double(forKey: SettingsStoreKey.maxBudgetUSD)
         }
+        platforms = PlatformSettings.load()
     }
 
     func saveTokenAndConfig() {
@@ -43,6 +45,7 @@ final class SettingsViewModel {
         UserDefaults.standard.set(notionDatabaseID, forKey: SettingsStoreKey.notionDatabaseID)
         UserDefaults.standard.set(model.rawValue, forKey: SettingsStoreKey.model)
         UserDefaults.standard.set(maxBudgetUSD, forKey: SettingsStoreKey.maxBudgetUSD)
+        PlatformSettings.save(platforms)
     }
 
     func selectRepository() {
@@ -149,6 +152,7 @@ struct SettingsView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 notionSection
+                platformSection
                 repositorySection
                 claudeSection
                 agentSection
@@ -196,6 +200,31 @@ struct SettingsView: View {
                     .font(.caption.monospaced())
                     .foregroundStyle(.secondary)
                     .textSelection(.enabled)
+            }
+        }
+    }
+
+    private var platformSection: some View {
+        sectionCard(title: "Platform") {
+            Text("조회할 환경을 선택하세요. 티켓의 `환경` 속성이 선택한 값과 겹치는 항목만 노출됩니다. 아무것도 선택하지 않으면 전체 티켓이 조회됩니다.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            HStack(spacing: 16) {
+                ForEach(Platform.allCases) { platform in
+                    Toggle(platform.displayName, isOn: Binding(
+                        get: { viewModel.platforms.contains(platform) },
+                        set: { isOn in
+                            if isOn {
+                                viewModel.platforms.insert(platform)
+                            } else {
+                                viewModel.platforms.remove(platform)
+                            }
+                        }
+                    ))
+                    .toggleStyle(.checkbox)
+                }
+                Spacer()
             }
         }
     }

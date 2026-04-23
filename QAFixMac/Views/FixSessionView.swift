@@ -4,7 +4,7 @@ struct FixSessionView: View {
     let ticket: Ticket
     let repo: URL
 
-    @AppStorage(SettingsStoreKey.model) private var modelRaw: String = AnthropicModel.sonnet4.rawValue
+    @AppStorage(SettingsStoreKey.model) private var modelRaw: String = AnthropicModel.opus46.rawValue
     @AppStorage(SettingsStoreKey.maxBudgetUSD) private var maxBudgetUSD: Double = 5.0
 
     @State private var viewModel: AgentViewModel
@@ -12,7 +12,7 @@ struct FixSessionView: View {
     init(ticket: Ticket, repo: URL) {
         self.ticket = ticket
         self.repo = repo
-        let model = (AnthropicModel(rawValue: UserDefaults.standard.string(forKey: SettingsStoreKey.model) ?? "") ?? .sonnet4).rawValue
+        let model = (AnthropicModel(rawValue: UserDefaults.standard.string(forKey: SettingsStoreKey.model) ?? "") ?? .opus46).rawValue
         let mcp = try? MCPConfigManager.configFileURL()
         let budget = UserDefaults.standard.object(forKey: SettingsStoreKey.maxBudgetUSD) == nil
             ? 5.0 : UserDefaults.standard.double(forKey: SettingsStoreKey.maxBudgetUSD)

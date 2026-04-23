@@ -52,7 +52,7 @@ final class AgentOrchestrator {
     init(
         service: ClaudeCodeService = ClaudeCodeCLIClient(),
         mcpConfigURL: URL? = nil,
-        model: String = AnthropicModel.sonnet4.rawValue,
+        model: String = AnthropicModel.opus46.rawValue,
         maxBudgetUSD: Double? = nil
     ) {
         self.service = service
