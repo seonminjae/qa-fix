@@ -6,11 +6,12 @@ struct TicketListView: View {
     @AppStorage(SettingsStoreKey.notionDatabaseID) private var databaseID: String = ""
 
     var body: some View {
-        HSplitView {
+        HStack(spacing: 0) {
             sidebar
-                .frame(minWidth: 240, idealWidth: 300)
+                .frame(width: 300)
+            Divider()
             detail
-                .frame(minWidth: 480, maxWidth: .infinity, maxHeight: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .task {
             resolveRepoIfNeeded()

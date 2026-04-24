@@ -4,35 +4,24 @@ struct FixSessionView: View {
     let ticket: Ticket
     let repo: URL
 
-    @AppStorage(SettingsStoreKey.model) private var modelRaw: String = AnthropicModel.opus46.rawValue
-    @AppStorage(SettingsStoreKey.maxBudgetUSD) private var maxBudgetUSD: Double = 5.0
+    @Environment(FixSessionStore.self) private var store
 
-    @State private var viewModel: AgentViewModel
-
-    init(ticket: Ticket, repo: URL) {
-        self.ticket = ticket
-        self.repo = repo
+    private var viewModel: AgentViewModel {
         let model = (AnthropicModel(rawValue: UserDefaults.standard.string(forKey: SettingsStoreKey.model) ?? "") ?? .opus46).rawValue
         let mcp = try? MCPConfigManager.configFileURL()
         let budget = UserDefaults.standard.object(forKey: SettingsStoreKey.maxBudgetUSD) == nil
             ? 5.0 : UserDefaults.standard.double(forKey: SettingsStoreKey.maxBudgetUSD)
-        let orchestrator = AgentOrchestrator(
-            mcpConfigURL: mcp,
+        return store.viewModel(
+            for: ticket,
             model: model,
-            maxBudgetUSD: budget
-        )
-        _viewModel = State(
-            initialValue: AgentViewModel(
-                orchestrator: orchestrator,
-                mcpConfigURL: mcp,
-                model: model,
-                maxBudgetUSD: budget
-            )
+            maxBudgetUSD: budget,
+            mcpConfigURL: mcp
         )
     }
 
     var body: some View {
-        VStack(spacing: 0) {
+        @Bindable var viewModel = viewModel
+        return VStack(spacing: 0) {
             ticketHeader
             Divider()
 
@@ -97,6 +86,14 @@ struct FixSessionView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onDisappear {
+            switch viewModel.stage {
+            case .ready, .completed, .failed:
+                store.discard(ticketPageID: ticket.pageID)
+            default:
+                break
+            }
+        }
     }
 
     private var ticketHeader: some View {
