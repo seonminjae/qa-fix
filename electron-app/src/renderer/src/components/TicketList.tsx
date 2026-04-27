@@ -27,10 +27,12 @@ function SeverityPill({ severity }: { severity: string }) {
 function TicketRow({
   ticket,
   selected,
+  active,
   onClick,
 }: {
   ticket: Ticket
   selected: boolean
+  active: boolean
   onClick: () => void
 }) {
   return (
@@ -45,6 +47,12 @@ function TicketRow({
       <div className="flex items-center gap-2 mb-1">
         <SeverityPill severity={ticket.severity} />
         <span className="font-mono text-xs text-slate-500">{ticket.displayID}</span>
+        {active && (
+          <span className="ml-auto inline-flex items-center gap-1 text-[10px] text-blue-300">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+            진행 중
+          </span>
+        )}
       </div>
       <p className="text-sm text-slate-200 line-clamp-2 leading-snug">{ticket.title}</p>
     </button>
@@ -92,9 +100,11 @@ function CommentItem({ comment }: { comment: TicketComment }) {
 
 interface Props {
   onStartSession: (ticket: Ticket, repoPath: string) => void
+  onResumeSession: () => void
+  activeTicketID: string | null
 }
 
-export function TicketList({ onStartSession }: Props) {
+export function TicketList({ onStartSession, onResumeSession, activeTicketID }: Props) {
   const [allTickets, setAllTickets] = useState<Ticket[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -149,8 +159,15 @@ export function TicketList({ onStartSession }: Props) {
     }
   }
 
+  const isSelectedActive =
+    selectedTicket !== null && selectedTicket.pageID === activeTicketID
+
   function handleStart() {
     if (!selectedTicket || !repoPath) return
+    if (isSelectedActive) {
+      onResumeSession()
+      return
+    }
     onStartSession(selectedTicket, repoPath)
   }
 
@@ -194,6 +211,7 @@ export function TicketList({ onStartSession }: Props) {
                 key={t.pageID}
                 ticket={t}
                 selected={t.pageID === selectedID}
+                active={t.pageID === activeTicketID}
                 onClick={() => selectTicket(t)}
               />
             ))
@@ -297,12 +315,17 @@ export function TicketList({ onStartSession }: Props) {
               )}
               <div className="ml-auto">
                 <button
-                  className="bg-blue-600 hover:bg-blue-500 text-white rounded px-4 py-1.5 text-sm transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className={cx(
+                    'rounded px-4 py-1.5 text-sm transition-colors disabled:opacity-40 disabled:cursor-not-allowed',
+                    isSelectedActive
+                      ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
+                      : 'bg-blue-600 hover:bg-blue-500 text-white'
+                  )}
                   onClick={handleStart}
-                  disabled={!repoPath}
+                  disabled={!repoPath && !isSelectedActive}
                   type="button"
                 >
-                  Start Fix Session
+                  {isSelectedActive ? '진행 중인 세션 이어보기' : 'Start Fix Session'}
                 </button>
               </div>
             </div>

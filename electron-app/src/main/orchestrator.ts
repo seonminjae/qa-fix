@@ -269,7 +269,14 @@ export class AgentOrchestrator extends EventEmitter {
     source: AgentLogSource,
   ): Promise<{ success: boolean; text: string; message?: string }> {
     let accumulated = ''
+    let streamBuf = ''
     let errorMessage: string | undefined
+
+    const flushStream = (): void => {
+      if (!streamBuf) return
+      this.append(source, streamBuf)
+      streamBuf = ''
+    }
 
     const cli = new ClaudeCodeCLIClient()
 
@@ -277,16 +284,19 @@ export class AgentOrchestrator extends EventEmitter {
       switch (event.type) {
         case 'assistantText':
           accumulated += event.text
-          this.append(source, event.text)
+          streamBuf += event.text
           this.emit('streamChunk', { source, text: event.text })
           break
         case 'toolUse':
+          flushStream()
           this.append('toolUse', `${event.name} ${event.input.slice(0, 200)}`)
           break
         case 'toolResult':
+          flushStream()
           this.append('toolResult', event.text.slice(0, 500))
           break
         case 'result':
+          flushStream()
           this.state.cumulativeCost += event.usage.totalCostUSD ?? 0
           this.state.cumulativeInputTokens += event.usage.inputTokens
           this.state.cumulativeOutputTokens += event.usage.outputTokens
@@ -298,9 +308,11 @@ export class AgentOrchestrator extends EventEmitter {
           }
           break
         case 'error':
+          flushStream()
           errorMessage = event.message
           break
         case 'rateLimit':
+          flushStream()
           this.append('system', 'rate-limit event received')
           break
         case 'system':
@@ -315,6 +327,7 @@ export class AgentOrchestrator extends EventEmitter {
     try {
       await handle
       this.currentCancel = undefined
+      flushStream()
 
       if (errorMessage !== undefined) {
         return { success: false, text: accumulated, message: errorMessage }
@@ -322,6 +335,7 @@ export class AgentOrchestrator extends EventEmitter {
       return { success: true, text: accumulated }
     } catch (err) {
       this.currentCancel = undefined
+      flushStream()
       const message = err instanceof Error ? err.message : String(err)
       return { success: false, text: accumulated, message }
     }

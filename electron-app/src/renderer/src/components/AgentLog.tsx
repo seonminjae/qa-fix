@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import type { AgentLogEntry, AgentLogSource } from '@shared/types'
+import type { StreamingBuffers } from '../hooks/useAgentState.js'
 import { cx } from '../lib/cx.js'
 
 const sourceColor: Record<AgentLogSource, string> = {
@@ -29,18 +30,30 @@ function formatTime(iso: string): string {
 
 interface Props {
   log: AgentLogEntry[]
+  streaming?: StreamingBuffers
 }
 
-export function AgentLog({ log }: Props) {
+export function AgentLog({ log, streaming }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null)
-  const prevLen = useRef(0)
+  const prevSig = useRef('')
+
+  const streamingEntries = streaming
+    ? (Object.entries(streaming).filter(([, text]) => text && text.length > 0) as Array<
+        [AgentLogSource, string]
+      >)
+    : []
+
+  const streamSig = streamingEntries.map(([s, t]) => `${s}:${t.length}`).join('|')
+  const sig = `${log.length}#${streamSig}`
 
   useEffect(() => {
-    if (log.length !== prevLen.current) {
-      prevLen.current = log.length
+    if (sig !== prevSig.current) {
+      prevSig.current = sig
       bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
     }
-  }, [log.length])
+  }, [sig])
+
+  const isEmpty = log.length === 0 && streamingEntries.length === 0
 
   return (
     <div className="flex flex-col h-full">
@@ -61,23 +74,40 @@ export function AgentLog({ log }: Props) {
         )}
       </div>
       <div className="flex-1 overflow-y-auto font-mono text-xs">
-        {log.length === 0 ? (
+        {isEmpty ? (
           <p className="text-slate-600 p-4">로그가 여기에 표시됩니다.</p>
         ) : (
-          log.map((entry) => (
-            <div
-              key={entry.id}
-              className="flex gap-2 px-3 py-0.5 hover:bg-surface-2 transition-colors"
-            >
-              <span className={cx('shrink-0 w-16 font-semibold', sourceColor[entry.source])}>
-                {sourceLabel[entry.source]}
-              </span>
-              <span className="shrink-0 text-slate-600">{formatTime(entry.timestamp)}</span>
-              <span className="text-slate-300 whitespace-pre-wrap break-words min-w-0">
-                {entry.text}
-              </span>
-            </div>
-          ))
+          <>
+            {log.map((entry) => (
+              <div
+                key={entry.id}
+                className="flex gap-2 px-3 py-0.5 hover:bg-surface-2 transition-colors"
+              >
+                <span className={cx('shrink-0 w-16 font-semibold', sourceColor[entry.source])}>
+                  {sourceLabel[entry.source]}
+                </span>
+                <span className="shrink-0 text-slate-600">{formatTime(entry.timestamp)}</span>
+                <span className="text-slate-300 whitespace-pre-wrap break-words min-w-0">
+                  {entry.text}
+                </span>
+              </div>
+            ))}
+            {streamingEntries.map(([source, text]) => (
+              <div
+                key={`stream-${source}`}
+                className="flex gap-2 px-3 py-0.5 bg-surface-2/40"
+              >
+                <span className={cx('shrink-0 w-16 font-semibold', sourceColor[source])}>
+                  {sourceLabel[source]}
+                </span>
+                <span className="shrink-0 text-slate-600">…</span>
+                <span className="text-slate-300 whitespace-pre-wrap break-words min-w-0">
+                  {text}
+                  <span className="inline-block w-1.5 h-3 ml-0.5 align-middle bg-slate-400 animate-pulse" />
+                </span>
+              </div>
+            ))}
+          </>
         )}
         <div ref={bottomRef} />
       </div>

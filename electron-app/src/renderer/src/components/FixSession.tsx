@@ -9,6 +9,7 @@ import { QuestionView } from './QuestionView.js'
 interface Props {
   ticket: Ticket
   repoPath: string
+  mode: 'start' | 'resume'
   onExit: () => void
 }
 
@@ -27,20 +28,20 @@ function SeverityPill({ severity }: { severity: string }) {
   )
 }
 
-export function FixSession({ ticket, repoPath, onExit }: Props) {
-  const state = useAgentState()
+export function FixSession({ ticket, repoPath, mode, onExit }: Props) {
+  const { state, streaming } = useAgentState()
   const [started, setStarted] = useState(false)
   const [diffFiles, setDiffFiles] = useState<DiffFile[]>([])
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!started) {
-      setStarted(true)
-      window.api.agent.start({ ticket, repoPath }).catch((e: unknown) => {
-        setError(String(e instanceof Error ? e.message : e))
-      })
-    }
-  }, [started, ticket, repoPath])
+    if (started) return
+    setStarted(true)
+    if (mode === 'resume') return
+    window.api.agent.start({ ticket, repoPath }).catch((e: unknown) => {
+      setError(String(e instanceof Error ? e.message : e))
+    })
+  }, [started, ticket, repoPath, mode])
 
   useEffect(() => {
     if (!state.diff) {
@@ -122,7 +123,7 @@ export function FixSession({ ticket, repoPath, onExit }: Props) {
             <span className="text-xs text-slate-500">Agent Log</span>
           </div>
           <div className="flex-1 overflow-hidden">
-            <AgentLog log={state.log} />
+            <AgentLog log={state.log} streaming={streaming} />
           </div>
         </div>
 

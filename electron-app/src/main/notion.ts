@@ -1,4 +1,11 @@
-import { Ticket, TicketComment, TicketAttachment, Severity, severityCompare } from '@shared/types'
+import {
+  Ticket,
+  TicketComment,
+  TicketAttachment,
+  Severity,
+  severityCompare,
+  Platform,
+} from '@shared/types'
 import { RetryPolicy, ConcurrencyLimiter, defaultRetryPolicy } from './retry'
 
 const BASE_URL = 'https://api.notion.com/v1'
@@ -233,6 +240,7 @@ export async function fetchOpenedTickets(
   databaseID: string,
   token: string,
   version?: string,
+  platforms?: Platform[],
 ): Promise<Ticket[]> {
   const filters: unknown[] = [{ property: '상태', select: { equals: 'Opened' } }]
   if (version && version.trim()) {
@@ -243,7 +251,13 @@ export async function fetchOpenedTickets(
     filter: { and: filters },
   })) as QueryResponse
 
-  const tickets = data.results.map(buildTicket)
+  let tickets = data.results.map(buildTicket)
+
+  if (platforms && platforms.length > 0) {
+    const selected = new Set<string>(platforms)
+    tickets = tickets.filter((t) => t.environment.some((env) => selected.has(env)))
+  }
+
   tickets.sort((a, b) => severityCompare(a.severity, b.severity))
   return tickets
 }

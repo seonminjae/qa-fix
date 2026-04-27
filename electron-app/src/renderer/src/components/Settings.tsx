@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import type { AppSettings, AnthropicModel } from '@shared/types'
-import { allAnthropicModels, anthropicModelDisplayName, defaultAppSettings } from '@shared/types'
+import type { AppSettings, AnthropicModel, Platform } from '@shared/types'
+import {
+  allAnthropicModels,
+  allPlatforms,
+  anthropicModelDisplayName,
+  defaultAppSettings,
+  platformDisplayName,
+} from '@shared/types'
 import { cx } from '../lib/cx.js'
 
 const inputCls =
   'bg-surface-2 border border-surface-3 rounded px-3 py-1.5 text-sm focus:border-blue-500 outline-none w-full'
 const btnPrimary =
-  'bg-blue-600 hover:bg-blue-500 text-white rounded px-3 py-1.5 text-sm transition-colors'
+  'bg-blue-600 hover:bg-blue-500 text-white rounded px-3 py-1.5 text-sm transition-colors whitespace-nowrap shrink-0'
 const btnSecondary =
-  'bg-surface-2 hover:bg-surface-3 text-slate-200 rounded px-3 py-1.5 text-sm border border-surface-3 transition-colors'
+  'bg-surface-2 hover:bg-surface-3 text-slate-200 rounded px-3 py-1.5 text-sm border border-surface-3 transition-colors whitespace-nowrap shrink-0'
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -195,6 +201,33 @@ export function Settings() {
               <p className="text-xs text-slate-400 font-mono mt-1 break-all">{mcpPath}</p>
             )}
           </Field>
+        </Section>
+
+        <Section title="Platform">
+          <p className="text-xs text-slate-500">
+            조회할 환경을 선택하세요. 티켓의 <code className="bg-surface-2 px-1 rounded">환경</code> 속성과 겹치는 항목만 노출됩니다. 아무것도 선택하지 않으면 전체 티켓이 조회됩니다.
+          </p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            {allPlatforms.map((p) => {
+              const checked = settings.platforms.includes(p)
+              return (
+                <label key={p} className="flex items-center gap-2 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 accent-blue-500"
+                    checked={checked}
+                    onChange={(e) => {
+                      const next = e.target.checked
+                        ? [...settings.platforms, p]
+                        : settings.platforms.filter((x) => x !== p)
+                      updateSetting({ platforms: next as Platform[] })
+                    }}
+                  />
+                  <span className="text-sm text-slate-200">{platformDisplayName[p]}</span>
+                </label>
+              )
+            })}
+          </div>
         </Section>
 
         <Section title="Repository">

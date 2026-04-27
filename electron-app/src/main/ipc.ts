@@ -45,7 +45,7 @@ export function registerIpcHandlers(window: BrowserWindow): void {
     const settings = getSettings()
     const token = await getNotionToken()
     if (!token) throw new Error('Notion token not set')
-    return fetchOpenedTickets(settings.notionDatabaseID, token, version)
+    return fetchOpenedTickets(settings.notionDatabaseID, token, version, settings.platforms)
   })
 
   ipcMain.handle('notion:fetchComments', async (_e, pageID: string) => {

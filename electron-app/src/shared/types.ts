@@ -76,18 +76,31 @@ export const allAnthropicModels: AnthropicModel[] = [
   'claude-haiku-4-5-20251001'
 ]
 
+export type Platform = 'iOS' | 'Android' | 'backend' | 'Web'
+
+export const allPlatforms: Platform[] = ['iOS', 'Android', 'backend', 'Web']
+
+export const platformDisplayName: Record<Platform, string> = {
+  iOS: 'iOS',
+  Android: 'Android',
+  backend: 'Backend',
+  Web: 'Web'
+}
+
 export interface AppSettings {
   notionDatabaseID: string
   repositoryPath: string | null
   model: AnthropicModel
   maxBudgetUSD: number
+  platforms: Platform[]
 }
 
 export const defaultAppSettings: AppSettings = {
   notionDatabaseID: '',
   repositoryPath: null,
   model: 'claude-opus-4-6',
-  maxBudgetUSD: 5.0
+  maxBudgetUSD: 5.0,
+  platforms: []
 }
 
 export type AgentPhase =
